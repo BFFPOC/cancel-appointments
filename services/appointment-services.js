@@ -21,9 +21,12 @@ exports.cancelAppt = function (req, res) {
         }
     ).then(function(response) {
         console.log(response);
-        res.send(response.data);
+        res.send(response);
     }).catch(err => {
-        console.log(err.response.data);
-        res.send(err.response.data);
+        if(!err.response) {
+            res.send("Server is busy! Retry after Sometime.");
+            return;
+        }
+        res.send(err.response && err.response.data);
     })
 };
