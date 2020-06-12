@@ -3,7 +3,7 @@ const axions = require('axios');
 
 exports.cancelAppt = function (req, res) {
     let path = 'cancel';
-    if((req.get('X-correlationid') || req.headers.authorization) === null) {
+    if((req.get('X-correlationid') || req.headers.authorization) == null) {
         res.status(400).send('invalid data input');
         return;
     }
@@ -20,9 +20,10 @@ exports.cancelAppt = function (req, res) {
             }
         }
     ).then(function(response) {
-        console.log(response);
-        res.send(response);
+        //console.log(response.data);
+        res.send(response.data);
     }).catch(err => {
+        //console.log(err.response);
         if(!err.response) {
             res.send("Server is busy! Retry after Sometime.");
             return;
