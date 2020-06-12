@@ -9,9 +9,9 @@ exports.cancelAppt = function (req, res) {
     }
     axions.put(
         "https://appointmentserviceapp-1591774967422.azurewebsites.net/cancel", {
-            id: req.body.id, //"333303", //"333301",
-            memberId: req.body.memberId, //"222205", //"222204", //
-            token: req.body.authorization //"8B-C98B12602557" // "83-1CAEDAA9C34A"
+            id: req.body.id,
+            memberId: req.body.memberId,
+            token: req.headers.authorization
         },
         {
             headers: {
@@ -20,10 +20,8 @@ exports.cancelAppt = function (req, res) {
             }
         }
     ).then(function(response) {
-        //console.log(response.data);
         res.send(response.data);
     }).catch(err => {
-        //console.log(err.response);
         if(!err.response) {
             res.send("Server is busy! Retry after Sometime.");
             return;

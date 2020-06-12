@@ -3,6 +3,8 @@ const app = require('express')(),
     bodyParser = require('body-parser'),
     port = process.env.PORT || 3000;
 
+    console.log(process.env.PORT);
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(function (req, res, next) {
