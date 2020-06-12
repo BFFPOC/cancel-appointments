@@ -11,7 +11,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.put('/cancel', apptServices.cancelAppt);
+app.put('/cancelAppt', apptServices.cancelAppt);
 
 app.listen(port, function (req, res) {
     console.log(`Running on port ${port}`);
