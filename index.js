@@ -1,7 +1,18 @@
-'use strict';
+const app = require('express')(),
+    apptServices = require('./services/appointment-services'),
+    bodyParser = require('body-parser'),
+    port = process.env.PORT || 3000;
 
-const http = require('./httpserver');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    next();
+});
 
-http.listen('3000', function(req,res) {
-    console.log('heeeello I am new server');
+app.put('/cancel', apptServices.cancelAppt);
+
+app.listen(port, function (req, res) {
+    console.log(`Running on port ${port}`);
 });
